@@ -3,9 +3,9 @@ const matchAppointments = (appointments, ids) => {
   return match;
 }
 
-export function getAppointmentsForDay(state, day) {
+function getAppointmentsForDay(state, day) {
   let appointmentArr = [];
-  state.days.map(dayObject => {
+  state.days.forEach(dayObject => {
     if (dayObject.name === day) {
       dayObject.appointments.forEach(apptId => appointmentArr.push(apptId))
     }
@@ -13,4 +13,4 @@ export function getAppointmentsForDay(state, day) {
   return matchAppointments(state.appointments, appointmentArr);
 }
 
-module.exports = { getAppointmentsForDay };
+module.exports = { matchAppointments, getAppointmentsForDay };
