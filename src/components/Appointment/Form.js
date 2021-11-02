@@ -5,17 +5,19 @@ import InterviewerList from "components/InterviewerList";
 
 export default function Form (props) {
   const [input, setInput] = useState(""); 
+  const [interviewer, setInterviewer] = useState(props.interviewer || null); 
+  
   const handleSave = function () {
-    console.log("what's good", input);
-    console.log("I'm saving");
+  }
+
+  const handleCancel = function () {
+    setInterviewer(null);
+    props.onCancel();
   }
   const handleInput = (event) => {
-    event.persist();
     setInput(event.target.value);
   }
-  console.log("", input);
 
-  console.log("Hello", props);
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
@@ -35,11 +37,13 @@ export default function Form (props) {
         </form>
         <InterviewerList 
          interviewers = {props.interviewers}
+         interviewer = {interviewer}
+         onChange = { setInterviewer }
         />
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
-          <Button danger>Cancel</Button>
+          <Button danger onClick= {handleCancel}>Cancel</Button>
           <Button confirm onClick= {handleSave}>Save</Button>
         </section>
       </section>

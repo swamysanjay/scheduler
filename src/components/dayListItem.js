@@ -1,5 +1,5 @@
 import React from "react";
-import "components/dayListItem.scss";
+import "./DayListItem.scss";
 import classNames from "classnames";
 
 const formatSpots = (spots) => {

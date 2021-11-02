@@ -1,11 +1,11 @@
-import React, {useState, useEffect, useDebugValue} from "react";
+import React, {useState, useEffect} from "react";
 
 import "components/Application.scss";
 import DayList from "./DayList";
-import InterviewerList from "./InterviewerList";
+//import InterviewerList from "./InterviewerList";
 import Appointment from "./Appointment";
 import axios from "axios";
-import { matchAppointments, getAppointmentsForDay, getInterview } from "helpers/selectors";
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 
 export default function Application(props) {
 
@@ -16,7 +16,7 @@ export default function Application(props) {
   });
 
   const setDay = day => setState(prev => ({...prev, day}));
-  const setDays = days => setState(prev => ({...prev, days}));
+  //const setDays = days => setState(prev => ({...prev, days}));
 
   useEffect(() => {
     Promise.all([
@@ -28,12 +28,13 @@ export default function Application(props) {
     })
   }, [])
 
-  const appointmentObjects = getAppointmentsForDay(state, state.day);
+  const appointmentsObject = getAppointmentsForDay(state, state.day);
+  const interviewersObject = getInterviewersForDay(state, state.day);
 
-  const appointment = appointmentObjects.map((appointmentObject) => {
-    const interview = getInterview(state, appointmentObjects.interview);
+  const appointment = appointmentsObject.map((appointmentObj) => {
+    const interview = getInterview(state, appointmentObj.interview);
     return (
-      <Appointment {...appointmentObject} key={appointmentObject.id} interview={interview}/>
+      <Appointment {...appointmentObj} key={appointmentObj.id} interview={interview} interviewers={interviewersObject}/>
     )
   });
 
