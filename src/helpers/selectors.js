@@ -26,13 +26,20 @@ function getInterview(state, interview) {
 }
 
 function getInterviewersForDay(state, day) {
-  let interviewArr = [];
-  state.days.map(dayObject => {
-    if (dayObject.name === day) {
-      dayObject.interviewers.forEach(interviewerId => interviewArr.push(interviewerId))
-    }
-  })
-  return matchAppointments(state.interviewers, interviewArr);
+  const interviewersArr = state.days.filter(dayObject => dayObject.name === day);
+  if (interviewersArr[0]) {
+    return matchAppointments(state.interviewers, interviewersArr[0].interviewers); 
+  }
 }
 
 module.exports = { matchAppointments, getAppointmentsForDay, getInterview, getInterviewersForDay };
+
+// function getInterviewersForDay(state, day) {
+//   let interviewArr = [];
+//   state.days.map(dayObject => {
+//     if (dayObject.name === day) {
+//       dayObject.interviewers.forEach(interviewerId => interviewArr.push(interviewerId))
+//     }
+//   })
+//   return matchAppointments(state.interviewers, interviewArr);
+// }
