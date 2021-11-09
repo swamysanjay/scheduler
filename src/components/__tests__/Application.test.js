@@ -1,8 +1,9 @@
-import React from 'react';
-import { render } from '@testing-library/react';
+import React from "react";
 
-import Application from 'components/Application';
+import { render } from "@testing-library/react";
 
-it('renders without crashing', () => {
+import Application from "components/Application";
+
+it ("renders without crashing", () => {
   render(<Application />);
 });
